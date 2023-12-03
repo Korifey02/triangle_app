@@ -16,7 +16,6 @@ def get_triangles_from_db(request):
 
 
 def get_calculated_results(request):
-    print(request)
     if request.method == 'POST':
         side_a = float(request.POST.get('side_a'))
         side_b = float(request.POST.get('side_b'))
