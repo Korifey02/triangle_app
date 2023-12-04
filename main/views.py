@@ -26,7 +26,7 @@ def get_calculated_results(request):
         side_b = float(request.POST.get('side_b'))
         triangle = RightTriangle(side_a, side_b)
 
-        if request.POST.get('form_mode') == ActionType.CALCULATE:
+        if request.POST.get('form_mode') == ActionType.CALCULATE.value:
             return render(request, 'calculator.html', {
                 'hypotenuse': triangle.hypotenuse,
                 'area': triangle.area,
