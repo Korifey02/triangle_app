@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .utils.triangle import RightTriangle
 from .models import Triangle
@@ -26,11 +26,16 @@ def get_calculated_results(request):
         side_b = float(request.POST.get('side_b'))
         triangle = RightTriangle(side_a, side_b)
 
-        return render(request, 'calculator.html', {
-            'hypotenuse': triangle.hypotenuse,
-            'area': triangle.area,
-            'perimeter': triangle.perimeter,
-        })
+        if request.POST.get('form_mode') == 'calculate':
+            return render(request, 'calculator.html', {
+                'hypotenuse': triangle.hypotenuse,
+                'area': triangle.area,
+                'perimeter': triangle.perimeter,
+            })
+
+        # Создаем экземпляр треугольника и сохраняем в базе данных
+        Triangle.objects.create(first_side=side_a, second_side=side_b)
+        return redirect('triangles_from_db')  # Перенаправляем пользователя на страницу данных из бд
 
     return render(request, 'calculator.html', {
         'hypotenuse': None,

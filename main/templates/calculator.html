@@ -38,7 +38,8 @@
         <label for="side_b">Сторона B:</label>
         <input type="number" name="side_b" value="{{ request.POST.side_b }}" required oninput="validateInput(this)">
         <br>
-        <button type="submit" name="calculate">Рассчитать</button>
+        <button type="submit" name="form_mode" value="calculate">Рассчитать</button>
+        <button type="submit" name="form_mode" value="remember">Запомнить треугольник</button>
     </form>
 
     <h2>Результаты:</h2>
