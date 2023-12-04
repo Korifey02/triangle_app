@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
+class Triangle(models.Model):
+    first_side = models.FloatField('Первый катет')
+    second_side = models.FloatField('Второй катет')
