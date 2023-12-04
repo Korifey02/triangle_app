@@ -7,3 +7,5 @@ typing_extensions==4.8.0
 tzdata==2023.3
 watchdog==3.0.0
 websocket-client==1.6.4
+psycopg2
+psycopg2-binary
