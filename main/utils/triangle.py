@@ -1,5 +1,3 @@
-
-
 class RightTriangle:
     def __init__(self, first_side: float, second_side: float) -> None:
         self.__first_side = first_side

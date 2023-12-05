@@ -1,6 +1,7 @@
 from django.urls import path
 
-from .views import get_home_page, get_calculator_page, get_triangles_from_db, get_calculated_results
+from .views import get_home_page, get_calculator_page, \
+    get_triangles_from_db, get_calculated_results
 
 urlpatterns = [
     path('', get_home_page, name='home'),

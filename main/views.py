@@ -15,7 +15,6 @@ def get_calculator_page(request):
 
 def get_triangles_from_db(request):
     triangles_from_db = Triangle.objects.all()
-    # Создаем экземпляры класса RightTriangle для каждого объекта из базы данных
     triangles = [RightTriangle(triangle.first_side, triangle.second_side) for triangle in triangles_from_db]
     return render(request, 'triangles_from_db.html', {'triangles': triangles})
 
