@@ -2,4 +2,3 @@ venv
 postgres-data
 .idea
 .env
-docker-compose.yml
