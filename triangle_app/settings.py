@@ -9,11 +9,12 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = Path(__file__).resolve().parent.parent # not in docker-compose
+BASE_DIR = os.path.abspath(os.path.join(__file__, '../../../'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +26,8 @@ SECRET_KEY = 'django-insecure-1y%xsnj=@6#y5o@zy9k+_^_5yiqlv@e6p7-cu$6@!bi$m2m1ip
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS  = [] # not in docker-compose
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -36,14 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'livesync',
+    # 'livesync', # not in docker for reload on code change
     'django.contrib.staticfiles',
-    'main'
+    'main',
+    'django.contrib.postgres'
 ]
 
-MIDDLEWARE_CLASSES = (
-    'livesync.core.middleware.DjangoLiveSyncMiddleware',
-)
+# MIDDLEWARE_CLASSES = (  # not in docker for reload on code change
+#     'livesync.core.middleware.DjangoLiveSyncMiddleware',
+# )
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,7 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'livesync.core.middleware.DjangoLiveSyncMiddleware'
+    # 'livesync.core.middleware.DjangoLiveSyncMiddleware' # not in docker for reload on code change
 ]
 
 ROOT_URLCONF = 'triangle_app.urls'
@@ -93,7 +96,8 @@ DATABASES = {
         'NAME': 'triangle_app',
         'USER': 'root',
         'PASSWORD': '1234567',
-        'HOST': 'localhost',
+        # 'HOST': 'localhost',  # not in docker-compose
+        'HOST': 'postgres',
         'PORT': '5432',
     }
 }
