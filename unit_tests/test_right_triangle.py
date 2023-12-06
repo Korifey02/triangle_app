@@ -1,21 +1,12 @@
-import unittest
+from django.test import TestCase
+from main.models import Triangle
 
-from main.utils.triangle import RightTriangle
 
-
-class TestRightTriangle(unittest.TestCase):
+class TestTriangle(TestCase):
 
     def setUp(self):
-        self.triangle1 = RightTriangle(3, 4)
-        self.triangle2 = RightTriangle(5, 12)
-
-    def test_get_first_side(self):
-        self.assertEqual(self.triangle1.get_first_side(), 3)
-        self.assertEqual(self.triangle2.get_first_side(), 5)
-
-    def test_get_second_side(self):
-        self.assertEqual(self.triangle1.get_second_side(), 4)
-        self.assertEqual(self.triangle2.get_second_side(), 12)
+        self.triangle1 = Triangle(first_side=3, second_side=4)
+        self.triangle2 = Triangle(first_side=5, second_side=12)
 
     def test_hypotenuse(self):
         self.assertEqual(self.triangle1.hypotenuse, 5)

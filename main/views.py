@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 
-from .utils.triangle import RightTriangle
 from .models import Triangle
 from .enums import ActionType
 
@@ -14,16 +13,15 @@ def get_calculator_page(request):
 
 
 def get_triangles_from_db(request):
-    triangles_from_db = Triangle.objects.all()
-    triangles = [RightTriangle(triangle.first_side, triangle.second_side) for triangle in triangles_from_db]
-    return render(request, 'triangles_from_db.html', {'triangles': triangles})
+    all_triangles = Triangle.objects.all()
+    return render(request, 'triangles_from_db.html', {'triangles': all_triangles})
 
 
 def get_calculated_results(request):
     if request.method == 'POST':
         side_a = float(request.POST.get('side_a'))
         side_b = float(request.POST.get('side_b'))
-        triangle = RightTriangle(side_a, side_b)
+        triangle = Triangle(first_side=side_a, second_side=side_b)
 
         if request.POST.get('form_mode') == ActionType.CALCULATE.value:
             return render(request, 'calculator.html', {
@@ -32,8 +30,7 @@ def get_calculated_results(request):
                 'perimeter': triangle.perimeter,
             })
 
-        # Создаем экземпляр треугольника и сохраняем в базе данных
-        Triangle.objects.create(first_side=side_a, second_side=side_b)
+        triangle.save()
         return redirect('triangles_from_db')
 
     return render(request, 'calculator.html', {
